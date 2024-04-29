@@ -14,6 +14,6 @@ fi
 # update code & helm chart
 git add . && git commit -m "updated version to ${1}"
 git push
-sed -i "s/\(^\s*tag:\s*\).*/\1\"${1}\"/" helm/values.yaml
+sed -i '' "s/^\(\s*tag:\s*\).*$/\1\"${1}\"/" helm/values.yaml
 
 echo "Done!"
