@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: vzak/node-hello-world
   pullPolicy: Always
-  tag: "v4"
+  tag: "v5"
 
 nameOverride: ""
 fullnameOverride: ""
