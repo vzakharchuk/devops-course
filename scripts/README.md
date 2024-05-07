@@ -5,7 +5,7 @@ This script provides a simple way to retrieve resource usage statistics for Kube
 ## Usage
 
 
-1. Save the `kubectl-stats` script to your local machine.
+1. Save the `kubeplugin` script to your local machine. Rename it to `kubectl-stats`.
 2. Make the script executable
 ```bash
 chmod +x kubectl-stats
