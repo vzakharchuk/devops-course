@@ -1,0 +1,21 @@
+#!/bin/bash
+
+if [ "$#" -ne 2 ]; then
+    echo "Usage: $0 <resource> <namespace>"
+    exit 1
+fi
+
+RESOURCE_TYPE=${1}
+NAMESPACE=${2}
+
+kubectl top $1 -n $2 | tail -n +2 | while read line
+
+do
+  NAME=$(echo $line | awk '{print $1}')
+  CPU=$(echo $line | awk '{print $2}')
+  MEMORY=$(echo $line | awk '{print $3}')
+
+printf "%-10s %-15s %-15s %-10s %-10s\n" "Resource" "Namespace" "Name" "CPU" "Memory"
+printf "%-10s %-15s %-15s %-10s %-10s\n" "${RESOURCE_TYPE}" "${NAMESPACE}" "${NAME}" "${CPU}" "${MEMORY}"
+
+done
