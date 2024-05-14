@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: myjob
+spec:
+  template:
+    spec:
+      containers:
+      - name: mycontainer
+        image: google/cloud-sdk:275.0.0-alpine
+        volumeMounts:
+        - name: mydisk
+          mountPath: /mnt/data
+      volumes:
+      - name: mydisk
+        gcePersistentDisk:
+          pdName: mydiskname
+          fsType: ext4
+      restartPolicy: Never
+  backoffLimit: 4

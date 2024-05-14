@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: hello-logger
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: hello-container
+              image: busybox
+              args:
+                - /bin/sh
+                - -c
+                - echo "hello"
+              imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
