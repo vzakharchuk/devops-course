@@ -6,7 +6,7 @@ on:
     - '**'
 
 jobs:
-  echo_job:
+  workflow_job:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,7 +39,7 @@ jobs:
           docker build -t ${IMAGE} .
           docker push ${IMAGE}
           if [ $? -eq 0 ]; then
-            echo "Image successfully pushed to Docker Hub."
+            echo "Image successfully pushed to Docker Hub!"
           else
             echo "Failed to push the image to Docker Hub."
             exit 1
