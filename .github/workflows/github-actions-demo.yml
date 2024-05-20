@@ -21,3 +21,5 @@ jobs:
 
       - name: Build & Push New Image
         run: chmod +x ./build_push.sh && ./build_push.sh ${{ github.sha }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
