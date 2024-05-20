@@ -12,7 +12,7 @@ else
 fi
 
 # update code & helm chart
-sed -i '' 's/^  tag: .*/  tag: "'"$1"'"/' helm/values.yaml
+sed -i '' 's/^  tag: .*/  tag: "'"$1"'"/' demo/values.yaml
 
 git status
 git add . && git commit -m "updated version to ${1}"
