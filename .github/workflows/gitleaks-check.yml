@@ -19,17 +19,24 @@ jobs:
     - name: Get latest Gitleaks release URL
       id: get_release
       run: |
-            curl -s https://api.github.com/repos/gitleaks/gitleaks/releases/latest \
-            | grep "browser_download_url.*linux-amd64" \
-            | cut -d : -f 2,3 \
-            | tr -d \" \
-            | wget -qi -
+          curl -s https://api.github.com/repos/gitleaks/gitleaks/releases/latest \
+          | grep "browser_download_url.*linux-amd64" \
+          | cut -d : -f 2,3 \
+          | tr -d \" > gitleaks-url.txt
+          cat gitleaks-url.txt
+  
+    - name: Download Gitleaks
+      run: |
+          url=$(cat gitleaks-url.txt)
+          echo "Downloading from $url"
+          wget -O gitleaks.tar.gz $url
+          ls -l gitleaks.tar.gz
   
     - name: Install Gitleaks
       run: |
-        tar -xzf gitleaks-linux-amd64.tar.gz -C /tmp
-        sudo mv /tmp/gitleaks /usr/local/bin/
-        rm gitleaks-linux-amd64.tar.gz
+          tar -xzf gitleaks.tar.gz -C /tmp
+          sudo mv /tmp/gitleaks /usr/local/bin/
+          rm gitleaks.tar.gz
 
     - name: Run Gitleaks
       run: |
