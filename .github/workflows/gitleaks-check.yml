@@ -1,0 +1,26 @@
+name: Gitleaks Check
+
+on:
+  workflow_call:
+
+jobs:
+  gitleaks-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.18'
+
+    - name: Install Gitleaks
+      run: |
+        wget -qO- https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64.tar.gz | tar xvz -C /tmp
+        sudo mv /tmp/gitleaks /usr/local/bin/
+
+    - name: Run Gitleaks
+      run: |
+        gitleaks detect --source . --exit-code 1

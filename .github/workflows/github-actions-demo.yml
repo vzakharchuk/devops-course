@@ -6,6 +6,9 @@ on:
     - '**'
 
 jobs:
+  gitleaks-check:
+    uses: ./.github/workflows/gitleaks-check.yml
+  
   workflow_job:
     runs-on: ubuntu-latest
 

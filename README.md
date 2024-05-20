@@ -1,17 +1,19 @@
+# Gitleaks Integration
 
-promts to create k8s manifests with kubectl-ai
+This repository includes the integration of `gitleaks` for scanning secrets in your code. By using a reusable workflow, we ensure an automatic check for secrets on each commit and pull request.
 
+## How the Scanner Works
 
-| Name                  | Prompt                                                    | Description                | Example  |
-|-----------------------|-----------------------------------------------------------|----------------------------|----------|
-| POD | Provide Pod manifest from image gcr.io/k8s-k3s/demo:v1.0.0. Open port 8080 | | [app.yaml](yaml/app.yaml) |
-| Liveness Probe |  Provide Pod manifest with liveness probe from image gcr.io/k8s-k3s/demo:v1.0.0. Open port 8080 | | [app-livenessProbe.yaml](yaml/app-livenessProbe.yaml)
-| Readiness Probe | Provide Pod manifest with readiness probe for the container from image gcr.io/k8s-k3s/demo:v1.0.0. Open port 8080 | | [app-readinessProbe.yaml](yaml/app-readinessProbe.yaml) |
-| Volume Mounts | Provide Pod manifest with liveness and readiness probes. Use image gcr.io/k8s-k3s/demo:v1.0.0. Add volume mount to data path on filesystem. Open port 8080 | | [app-volumeMounts.yaml](yaml/app-volumeMounts.yaml) |
-| Cron job | Provide CronJob manifest. it should log "hello" each 5 seconds. Use busybox image | | [app-cronjob.yaml](yaml/app-cronjob.yaml) |
-| Job | Provide job manifest.  use google/cloud-sdk:275.0.0-alpine image. add volume mount to gcePersistentDisk | | [app-job.yaml](yaml/app-job.yaml) |
-| Multicontainer | provide pod manifest with 2 containers - debian and nginx. mount html folder to ngix container. write in infinite loop to same folder from debian contaimer | | [app-multicontainer.yaml](yaml/app-multicontainer.yaml) |
-| Limit resources | provide pod manifest with readiness and liveness probes, add resource block with limit and requests |  | [app-resources.yaml](yaml/app-resources.yaml) |
-| Secret env | provide pod manifest with readis image, add secrets username and password from Secret" | | [app-secret-env.yaml](yaml/app-secret-env.yaml) |
+`gitleaks` scans your code for secrets (e.g., API keys, passwords, tokens) and rejects commits if it finds any. This helps prevent the accidental exposure of confidential information.
 
+## Configuration Usage
 
+```yaml
+jobs:
+  # Enabling the gitleaks-check job from the reusable workflow
+  gitleaks-check:
+    uses: ./.github/workflows/gitleaks-check.yml
+```
+
+If you want to disable the pre-commit hook, you can use the following command:
+```git config hooks.gitleaks-enable true/false```
