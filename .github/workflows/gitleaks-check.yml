@@ -16,12 +16,20 @@ jobs:
       with:
         go-version: '1.18'
 
+    - name: Get latest Gitleaks release URL
+      id: get_release
+      run: |
+            curl -s https://api.github.com/repos/gitleaks/gitleaks/releases/latest \
+            | grep "browser_download_url.*linux-amd64" \
+            | cut -d : -f 2,3 \
+            | tr -d \" \
+            | wget -qi -
+  
     - name: Install Gitleaks
       run: |
-        curl -sSLo gitleaks.tar.gz https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64.tar.gz
-        tar -xzf gitleaks.tar.gz -C /tmp
+        tar -xzf gitleaks-linux-amd64.tar.gz -C /tmp
         sudo mv /tmp/gitleaks /usr/local/bin/
-        rm gitleaks.tar.gz
+        rm gitleaks-linux-amd64.tar.gz
 
     - name: Run Gitleaks
       run: |
