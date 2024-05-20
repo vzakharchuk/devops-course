@@ -11,7 +11,7 @@ else
     echo "Failed to push the image to Docker Hub."
 fi
 
-# update code & helm chart
+set -x 
 sed -i '' 's/^  tag: .*/  tag: "'"$1"'"/' demo/values.yaml
 
 git status
