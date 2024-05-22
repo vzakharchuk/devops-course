@@ -8,7 +8,7 @@ image:
   repository: vzak/node-hello-world
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "596bad50befdde97112ad9b8ca88dbf102f7d532"
+  tag: "cd7af12ac2fc904f1f17a3787c85bb6f003c0bf1"
   arch: amd64
 
 secret:
