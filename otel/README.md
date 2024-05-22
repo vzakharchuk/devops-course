@@ -13,3 +13,5 @@ Sample configuration for Kbot that send logs to [OpenTelemetry Collector] and me
 export TELE_TOKEN=<TOKEN>
 docker-compose up
 ```
+Send messages to the bot and check Grafana (locally) on port 3002
+![Grafana UI](./grafana.png)
